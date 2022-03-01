@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+<head>	
+	<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+	</script>
+</head>
+
+<body style = "text-align:center;" id = "body">
+	
+	<p id = "DIS" style =
+		"font-size: 15px; font-weight: bold;">
+	</p>
+
+	<input type="checkbox" id="myCheck"> Bihar
+	<input type="checkbox" id="myCheck1"> UP
+
+	<button onclick = "constructTable('#table')">
+		Show Data in Table
+	</button>
+	
+	<br><br>
+	
+	<table align = "center"
+			id="table" border="1">
+	</table>
+	
+	<script>
+		var show = document.getElementById("DIS");
+		
+	var list = [
+	{
+      studentId:101,
+      studentName:"Nishant Kumar",
+      studentMobNo:"7765958354",
+      studentState:"Bihar"
+    },
+    {
+      studentId:102,
+      studentName:"suresh Kumar",
+      studentMobNo:"9865958377",
+      studentState:"UP"
+    },
+    {
+      studentId:103,
+      studentName:"Rajeev Kumar",
+      studentMobNo:"8365958376",
+      studentState:"Mp"
+    },
+    {
+      studentId:104,
+      studentName:"Mahesh Kumar",
+      studentMobNo:"6365958398",
+      studentState:"Bihar"
+    },
+	{
+      studentId:105,
+      studentName:"Nishant Kumar",
+      studentMobNo:"7765958354",
+      studentState:"Bihar"
+    },
+    {
+      studentId:106,
+      studentName:"suresh Kumar",
+      studentMobNo:"9865958377",
+      studentState:"UP"
+    },
+    {
+      studentId:107,
+      studentName:"Rajeev Kumar",
+      studentMobNo:"8365958376",
+      studentState:"Mp"
+    },
+    {
+      studentId:108,
+      studentName:"Mahesh Kumar",
+      studentMobNo:"6365958398",
+      studentState:"Bihar"
+    },
+	{
+      studentId:109,
+      studentName:"Rajeev Kumar",
+      studentMobNo:"8365958376",
+      studentState:"Mp"
+    },
+    {
+      studentId:110,
+      studentName:"Mahesh Kumar",
+      studentMobNo:"6365958398",
+      studentState:"Bihar"
+    },
+	];
+		
+		show.innerHTML = "...Student Details...<br><br>"
+				+ JSON.stringify(list[0]) + "<br>"
+				+ JSON.stringify(list[1]) + "<br>"
+				+ JSON.stringify(list[2]) + "<br>"
+				+ JSON.stringify(list[3]) + "<br>"
+				+ JSON.stringify(list[4]) + "<br>"
+				+ JSON.stringify(list[5]) + "<br>"
+				+ JSON.stringify(list[6]) + "<br>"
+				+ JSON.stringify(list[7]) + "<br>"
+				+ JSON.stringify(list[8]) + "<br>"
+			    + JSON.stringify(list[9]);
+			
+		function constructTable(selector) {
+			if (document.getElementById("myCheck").checked == true) 
+			{
+			 var cols = Headers(list, selector);           
+			  for (var i = 0; i < list.length; i++) 
+			  {           
+				var row = $('<tr/>');
+				for (var colIndex = 0; colIndex < cols.length; colIndex++)
+				{
+					var val = list[i][cols[colIndex]];
+					if (val == null) val = "";
+					row.append($('<td/>').html(val));
+				}           
+				if (list[i][cols[3]] == "Bihar") 
+				{
+					$(selector).append(row);
+			    }
+				if (document.getElementById("myCheck1").checked == true){
+					if (list[i][cols[3]] == "UP") 
+				{
+					$(selector).append(row);
+			    }
+				}				
+		      }
+		    }
+		     else if (document.getElementById("myCheck1").checked == true) 
+			{
+			 var cols = Headers(list, selector);           
+			  for (var i = 0; i < list.length; i++) 
+			  {           
+				var row = $('<tr/>');
+				for (var colIndex = 0; colIndex < cols.length; colIndex++)
+				{
+					var val = list[i][cols[colIndex]];
+					if (val == null) val = "";
+					row.append($('<td/>').html(val));
+				}           
+					if (list[i][cols[3]] == "UP") 
+				    {
+					  $(selector).append(row);
+			        }
+				
+		      }
+		    }
+			else {
+				var cols = Headers(list, selector);
+
+				for (var i = 0; i < list.length; i++) {
+					var row = $('<tr/>');
+					for (var colIndex = 0; colIndex < cols.length; colIndex++) {
+						var val = list[i][cols[colIndex]];
+
+						if (val == null) val = "";
+						row.append($('<td/>').html(val));
+					}
+					$(selector).append(row);
+				}
+			}
+		}		
+		function Headers(list, selector) {
+			var columns = [];
+			var header = $('<tr/>');
+			
+			for (var i = 0; i < list.length; i++) {
+				var row = list[i];
+				
+				for (var k in row) {
+					if ($.inArray(k, columns) == -1) {
+						columns.push(k);						
+						header.append($('<th/>').html(k));
+					}
+				}
+			}			
+			$(selector).append(header);
+				return columns;
+		}	
+	</script>
+</body>
+</html>
